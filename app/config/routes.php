@@ -47,7 +47,7 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 require_once APP_DIR . 'config/middleware.php';
 get_config(['middlewares' => $middleware_config]);
 
-$router->get('/', 'Welcome::index');
+$router->get('/', 'AuthController::login');
 $router->get('/login', 'AuthController::login');
 $router->post('/login', 'AuthController::login');
 $router->get('/logout', 'AuthController::logout');
