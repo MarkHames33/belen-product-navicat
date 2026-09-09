@@ -441,6 +441,13 @@ class Session {
             return false;
         }
 
+        // session_regenerate_id() must happen before headers are sent.
+        // If headers have already been emitted, skip regeneration instead of
+        // triggering the warning shown in development.
+        if (headers_sent()) {
+            return false;
+        }
+
         $_SESSION['last_regenerate'] = time();
         
         return @session_regenerate_id((bool)$destroy);
